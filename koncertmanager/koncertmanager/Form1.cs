@@ -15,13 +15,14 @@ namespace koncertmanager
         private Label lblTitle;
         private Button btnAddConcert;
         private TextBox txtSearch;
-        private NumericUpDown numPriceFilter; 
+        private NumericUpDown numPriceFilter;
         private ComboBox cmbGenre;
         private ListView lstConcerts;
         public Form1()
         {
             InitializeComponent();
             DrawElements();
+            LoadConcerts();
             btnAddConcert.Click += (sender, e) => addConcert();
         }
         public void DrawElements()
@@ -97,6 +98,17 @@ namespace koncertmanager
         {
             Form2 form2 = new Form2();
             form2.Show();
+            Hide();
+        }
+        static List<Koncert> concerts = new List<Koncert>();
+        private void LoadConcerts()
+        {
+            //add each concert into the listview
+            foreach (var item in concerts)
+            {
+                lstConcerts.Items.Add(new ListViewItem(new string[] { item.Knev, item.Eloadas, item.Jegyar.ToString(), item.Idopont.ToString("yyyy-MM-dd") }));
+
+            }
         }
     }
 }
