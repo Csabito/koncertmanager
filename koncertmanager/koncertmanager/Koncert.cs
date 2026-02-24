@@ -8,21 +8,23 @@ namespace koncertmanager
 {
     abstract internal class Koncert
     {
-        private string knev, eloado, eloadas, hely;
+        private string knev, eloado, eloadas, hely, psize;
         private DateTime idopont;
         private int jegyar;
 
-        public Koncert(string knev, string eloado, string eloadas, string hely, DateTime idopont, int jegyar)
+        public Koncert(string knev, string eloado, string eloadas, string hely, string psize, DateTime idopont, int jegyar)
         {
             Knev = knev;
             Eloado = eloado;
             Eloadas = eloadas;
             Hely = hely;
+            Psize = psize;
             Idopont = idopont;
             Jegyar = jegyar;
         }
 
         public string Knev { get => knev; set => knev = value; }
+        public string Psize { get => psize; set => psize = value; }
         public string Eloado { get => eloado; set => eloado = value; }
         public string Eloadas { get => eloadas; set => eloadas = value; }
         public string Hely { get => hely; set => hely = value; }

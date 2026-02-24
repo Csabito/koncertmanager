@@ -22,6 +22,7 @@ namespace koncertmanager
         {
             InitializeComponent();
             DrawElements();
+            btnAddConcert.Click += addConcert();
         }
         public void DrawElements()
         {
@@ -91,6 +92,11 @@ namespace koncertmanager
             this.Controls.Add(lstConcerts);
             this.Controls.Add(filterPanel);
             this.Controls.Add(lblTitle);
+        }
+        private void addConcert()
+        {
+            Form2 form2 = new Form2();
+            form2.Show();
         }
     }
 }
