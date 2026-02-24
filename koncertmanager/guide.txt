@@ -1,0 +1,20 @@
+FORM1: starting page
+title
+adding concert button
+Filtering: 
+	by place, by genre, by price (+ price types), by stage 
+Listview: 
+	showing the closest concerts to the current date 
+	(concert title;performer(s) name(s);genre;place;date-time;price)
+
+FORM2: adding concert station
+title
+adding data:
+	Concert title
+	Performer(s) name(s)
+	Genre
+	Place:(stage's name/size)
+	Date + time
+	Price
+FORM3?
+
