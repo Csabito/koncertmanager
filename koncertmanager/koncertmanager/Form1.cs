@@ -22,7 +22,7 @@ namespace koncertmanager
         {
             InitializeComponent();
             DrawElements();
-            btnAddConcert.Click += addConcert();
+            btnAddConcert.Click += (sender, e) => addConcert();
         }
         public void DrawElements()
         {

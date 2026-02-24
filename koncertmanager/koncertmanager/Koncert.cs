@@ -33,4 +33,22 @@ namespace koncertmanager
 
         
     }
+    internal class KoncertFeldolg : Koncert
+    {
+        public KoncertFeldolg(string knev, string eloado, string eloadas, string hely, string psize, DateTime idopont, int jegyar)
+           : base(knev, eloado, eloadas, hely, psize, idopont, jegyar) 
+        {
+            
+        }
+        public static KoncertFeldolg FromFileString(string line)
+        {
+            var split = line.Split(';');
+            return new KoncertFeldolg(split[0], split[1], split[2], split[3], split[4], DateTime.Parse(split[5]), int.Parse(split[6]));
+        }
+        public string ToFileString()
+        {
+            return $"{Knev};{Eloado};{Eloadas};{Hely};{Psize};{Idopont:yyyy-MM-dd HH:mm};{Jegyar}";
+        }
+
+    }
 }
