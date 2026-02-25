@@ -168,6 +168,7 @@ namespace koncertmanager
                 Minimum = 0,
                 Maximum = 1000000,
                 Value = 5000,
+                Increment = 100,
                 Dock = DockStyle.Fill,
                 Font = inputFont,
                 BorderStyle = BorderStyle.FixedSingle,
