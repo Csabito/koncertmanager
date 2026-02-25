@@ -98,7 +98,6 @@ namespace koncertmanager
         {
             Form2 form2 = new Form2();
             form2.Show();
-            Hide();
         }
         static List<Koncert> concerts = new List<Koncert>();
         private void LoadConcerts()
