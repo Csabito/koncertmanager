@@ -103,6 +103,10 @@ namespace koncertmanager
         static List<Koncert> concerts = new List<Koncert>();
         private void LoadConcerts()
         {
+            if (System.IO.File.Exists("concerts.txt"))
+                System.IO.File.ReadAllLines("concerts.txt").ToList().ForEach(sor => concerts.Add(KoncertFeldolg.FromFileString(sor)));
+            else
+                System.IO.File.Create("concerts.txt").Close();
             //add each concert into the listview
             foreach (var item in concerts)
             {

@@ -179,6 +179,8 @@ namespace koncertmanager
             );
 
             MessageBox.Show("Koncert mentve!");
+            Form1 form1 = new Form1();
+            form1.Show();
             Close();
         }
     }
