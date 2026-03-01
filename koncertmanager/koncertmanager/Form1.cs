@@ -30,7 +30,7 @@ namespace koncertmanager
         {
             // 1. Form Settings
             this.Text = "Concert Manager Pro";
-            this.Size = new Size(800, 500);
+            this.Size = new Size(700, 500);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -82,7 +82,6 @@ namespace koncertmanager
             lstConcerts.Columns.Add("Location", 100);
             lstConcerts.Columns.Add("Size of Loaction", 100);
             lstConcerts.Columns.Add("Előadó", 100);
-            lstConcerts.Columns.Add("Előadás", 100);
             lstConcerts.Columns.Add("Genre", 100);
             lstConcerts.Columns.Add("Price", 100);
             lstConcerts.Columns.Add("Date", 100);

@@ -77,21 +77,22 @@ namespace koncertmanager
     }
     class Eloadasok : Koncert
     {
-        private string eloado, eloadas;
+        private string eloado, eloadas, genre;
         private int jegyar;
         public string Eloado { get => eloado; set => eloado = value; }
         public string Eloadas { get => eloadas; set => eloadas = value; }
+        public string Genre { get => genre; set => genre = value; }
         public int Jegyar { get => jegyar; set => jegyar = value; }
 
-        public Eloadasok(string knev, string hely, string psize, DateTime idopont, string eloado, string eloadas, int jegyar) : base(knev, hely, psize, idopont)
+        public Eloadasok(string knev, string hely, string psize, DateTime idopont, string eloado,string genre, int jegyar) : base(knev, hely, psize, idopont)
         {
             Eloado = eloado;
-            Eloadas = eloadas;
+            Genre = genre;
             Jegyar = jegyar;
         }
         public override string ToString()
         {
-            return $"{base.ToString()};{Eloado};{Eloadas};{Jegyar}";
+            return $"{base.ToString()};{Eloado};{Genre};{Jegyar}";
         }
     }
     class KoncertManager
@@ -116,13 +117,13 @@ namespace koncertmanager
             
         }
 
-        public void UjKoncert(string nev, string hely, string psize, DateTime idopont, string eloado, string eloadas, int jegyar)
+        public void UjKoncert(string nev, string hely, string psize, DateTime idopont, string eloado, string genre, int jegyar)
         {
            
-            koncert.Add(new Eloadasok(nev, hely, psize, idopont, eloado, eloadas, jegyar));
+            koncert.Add(new Eloadasok(nev, hely, psize, idopont, eloado, genre, jegyar));
 
             System.IO.StreamWriter sw = new System.IO.StreamWriter("concerts.txt", append: true);
-            sw.WriteLine($"{nev};{hely};{psize};{idopont};{eloado};{eloadas};{jegyar}");
+            sw.WriteLine($"{nev};{hely};{psize};{idopont};{eloado};{genre};{jegyar}");
             sw.Close();
         }
 
@@ -147,6 +148,7 @@ namespace koncertmanager
                     var e = k as Eloadasok;
                     string eloado = e?.Eloado ?? string.Empty;
                     string eloadas = e?.Eloadas ?? string.Empty;
+                    string genre = e?.Genre ?? string.Empty;
                     string jegyar = e != null ? e.Jegyar.ToString() : string.Empty;
 
                     var lvItem = new ListViewItem(new[]
@@ -154,10 +156,10 @@ namespace koncertmanager
                         k.Knev,
                         k.Hely,
                         k.Psize,
-                        k.Idopont.ToString("yyyy-MM-dd"),
                         eloado,
-                        eloadas,
-                        jegyar
+                        genre,
+                        jegyar,
+                        k.Idopont.ToString("yyyy-MM-dd")
                     });
 
                     listView.Items.Add(lvItem);
