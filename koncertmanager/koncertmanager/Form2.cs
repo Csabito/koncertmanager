@@ -247,17 +247,16 @@ namespace koncertmanager
                 return;
             }
 
-            var ujKoncert = new KoncertFeldolg(
+            KoncertManager manager = new KoncertManager();
+            manager.UjKoncert(
                 nev.Text.Trim(),
-                eloado.Text.Trim(),
-                mufaj.SelectedItem.ToString(),
                 helyszin.Text.Trim(),
                 szinpad.SelectedItem.ToString(),
                 idopont.Value,
+                eloado.Text.Trim(),
+                mufaj.SelectedItem.ToString(),
                 (int)jegyar.Value
             );
-
-            File.AppendAllText("concerts.txt", ujKoncert.ToFileString() + Environment.NewLine, Encoding.UTF8);
 
             MessageBox.Show("Koncert mentve!");
             Form1 form1 = new Form1();

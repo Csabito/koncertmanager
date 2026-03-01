@@ -14,6 +14,7 @@ namespace koncertmanager
     {
         private Label lblTitle;
         private Button btnAddConcert;
+        private Button btnSearchConcert;
         private TextBox txtSearch;
         private NumericUpDown numPriceFilter;
         private ComboBox cmbGenre;
@@ -58,6 +59,7 @@ namespace koncertmanager
 
             // 5. Add Button
             btnAddConcert = new Button() { Text = "Add Concert", Width = 100, BackColor = Color.LightGreen };
+            btnSearchConcert = new Button() { Text = "Search Concert", Width = 100, BackColor = Color.LightBlue };
 
             // 6. Price Filter (NumericUpDown acts as ButtonUp/ButtonDown)
             Label lblPrice = new Label() { Text = "Max Price:", AutoSize = true, Margin = new Padding(10, 5, 0, 0) };
@@ -76,18 +78,33 @@ namespace koncertmanager
                 FullRowSelect = true,
                 GridLines = true
             };
-            lstConcerts.Columns.Add("Concert Name", 250);
-            lstConcerts.Columns.Add("Genre", 150);
+            lstConcerts.Columns.Add("Concert Name", 100);
+            lstConcerts.Columns.Add("Location", 100);
+            lstConcerts.Columns.Add("Size of Loaction", 100);
+            lstConcerts.Columns.Add("Előadó", 100);
+            lstConcerts.Columns.Add("Előadás", 100);
+            lstConcerts.Columns.Add("Genre", 100);
             lstConcerts.Columns.Add("Price", 100);
-            lstConcerts.Columns.Add("Date", 150);
+            lstConcerts.Columns.Add("Date", 100);
 
             // Add controls to the Filter Panel
-            filterPanel.Controls.Add(btnAddConcert);
-            filterPanel.Controls.Add(new Label() { Text = "  |  ", AutoSize = true }); // Visual separator
-            filterPanel.Controls.Add(txtSearch);
-            filterPanel.Controls.Add(lblPrice);
-            filterPanel.Controls.Add(numPriceFilter);
-            filterPanel.Controls.Add(cmbGenre);
+            filterPanel.Controls.AddRange(new Control[]
+            {
+                btnAddConcert,
+                new Label() {Text = "|", AutoSize = true},
+                txtSearch,
+                lblPrice,
+                numPriceFilter,
+                cmbGenre,
+                btnSearchConcert
+            });
+            //filterPanel.Controls.Add(btnAddConcert);
+            //filterPanel.Controls.Add(new Label() { Text = "  |  ", AutoSize = true }); // Visual separator
+            //filterPanel.Controls.Add(txtSearch);
+            //filterPanel.Controls.Add(lblPrice);
+            //filterPanel.Controls.Add(numPriceFilter);
+            //filterPanel.Controls.Add(cmbGenre);
+            //filterPanel.Controls.Add(btnSearchConcert);
 
             // Add everything to the Form
             this.Controls.Add(lstConcerts);
@@ -99,19 +116,11 @@ namespace koncertmanager
             Form2 form2 = new Form2();
             form2.Show();
         }
-        static List<Koncert> concerts = new List<Koncert>();
+        static KoncertManager manager = new KoncertManager();
         private void LoadConcerts()
         {
-            if (System.IO.File.Exists("concerts.txt"))
-                System.IO.File.ReadAllLines("concerts.txt").ToList().ForEach(sor => concerts.Add(KoncertFeldolg.FromFileString(sor)));
-            else
-                System.IO.File.Create("concerts.txt").Close();
-            //add each concert into the listview
-            foreach (var item in concerts)
-            {
-                lstConcerts.Items.Add(new ListViewItem(new string[] { item.Knev, item.Eloadas, item.Jegyar.ToString(), item.Idopont.ToString("yyyy-MM-dd") }));
-
-            }
+            manager.KoncertBeolvas();
+            manager.FillListView(lstConcerts);
         }
     }
 }
