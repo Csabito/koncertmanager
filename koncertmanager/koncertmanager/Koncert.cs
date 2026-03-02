@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace koncertmanager
 {
+<<<<<<< Updated upstream
     abstract internal class Koncert
+=======
+    abstract class Koncert
+>>>>>>> Stashed changes
     {
         private string knev, eloado, eloadas, hely, psize;
         private DateTime idopont;

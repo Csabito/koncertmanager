@@ -25,15 +25,58 @@ namespace koncertmanager
             Felepites();
             mentesGomb.Click += (sender, e) => Ment();
             visszaGomb.Click += (sender, e) => Close();
-        }
+        }   
 
         private void Felepites()
         {
             this.Text = "Új koncert hozzáadása";
+<<<<<<< Updated upstream
             this.Size = new Size(400, 400);
             this.StartPosition = FormStartPosition.CenterParent;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+=======
+            this.Size = new Size(460, 560);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.BackColor = Color.FromArgb(240, 240, 248);
+            this.Font = new Font("Segoe UI", 9f);
+
+            var header = new Panel()
+            {
+                Dock = DockStyle.Top,
+                Height = 64,
+                BackColor = Color.FromArgb(22, 22, 40)
+            };
+
+            var headerLabel = new Label()
+            {
+                Text = "   Új Koncert Hozzáadása",
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 13f, FontStyle.Bold),
+                AutoSize = false,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Padding = new Padding(20, 0, 0, 0)
+            };
+            header.Controls.Add(headerLabel);
+
+            var card = new Panel()
+            {
+                Location = new Point(20, 84),
+                Size = new Size(410, 400),
+                BackColor = Color.White,
+                Padding = new Padding(15)
+            };
+            card.Paint += (s, e) =>
+            {
+                using (var pen = new Pen(Color.FromArgb(210, 210, 230)))
+                {
+                    e.Graphics.DrawRectangle(pen,0, 0, card.Width - 1, card.Height - 1);
+                }
+            };
+>>>>>>> Stashed changes
 
             var tabla = new TableLayoutPanel()
             {

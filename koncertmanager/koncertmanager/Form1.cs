@@ -76,18 +76,39 @@ namespace koncertmanager
                 FullRowSelect = true,
                 GridLines = true
             };
+<<<<<<< Updated upstream
             lstConcerts.Columns.Add("Concert Name", 250);
             lstConcerts.Columns.Add("Genre", 150);
+=======
+            lstConcerts.Columns.Add("Concert Name", 100);
+            lstConcerts.Columns.Add("Location", 100);
+            lstConcerts.Columns.Add("Size of Loaction", 100);
+            lstConcerts.Columns.Add("Artist/Band", 100);
+            lstConcerts.Columns.Add("Genre", 100);
+>>>>>>> Stashed changes
             lstConcerts.Columns.Add("Price", 100);
             lstConcerts.Columns.Add("Date", 150);
 
             // Add controls to the Filter Panel
+<<<<<<< Updated upstream
             filterPanel.Controls.Add(btnAddConcert);
             filterPanel.Controls.Add(new Label() { Text = "  |  ", AutoSize = true }); // Visual separator
             filterPanel.Controls.Add(txtSearch);
             filterPanel.Controls.Add(lblPrice);
             filterPanel.Controls.Add(numPriceFilter);
             filterPanel.Controls.Add(cmbGenre);
+=======
+            filterPanel.Controls.AddRange(new Control[]
+            {
+                btnAddConcert,
+                new Label() {Text = "|", AutoSize = true},
+                txtSearch,
+                lblPrice,
+                numPriceFilter,
+                cmbGenre,
+                btnSearchConcert
+            });
+>>>>>>> Stashed changes
 
             // Add everything to the Form
             this.Controls.Add(lstConcerts);
