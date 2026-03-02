@@ -71,16 +71,15 @@ namespace koncertmanager
 
         public override string ToString()
         {
-            return $"{Knev};{Hely};{Psize};{Idopont:yyyy-MM-dd HH:mm}";
+            return $"{Knev};{Hely};{Psize};{Idopont}";
         }
 
     }
     class Eloadasok : Koncert
     {
-        private string eloado, eloadas, genre;
+        private string eloado, genre;
         private int jegyar;
         public string Eloado { get => eloado; set => eloado = value; }
-        public string Eloadas { get => eloadas; set => eloadas = value; }
         public string Genre { get => genre; set => genre = value; }
         public int Jegyar { get => jegyar; set => jegyar = value; }
 
@@ -114,17 +113,19 @@ namespace koncertmanager
             {
                 System.IO.File.Create("concerts.txt").Close();
             }
-            
+
         }
 
         public void UjKoncert(string nev, string hely, string psize, DateTime idopont, string eloado, string genre, int jegyar)
         {
-           
+
             koncert.Add(new Eloadasok(nev, hely, psize, idopont, eloado, genre, jegyar));
 
             System.IO.StreamWriter sw = new System.IO.StreamWriter("concerts.txt", append: true);
             sw.WriteLine($"{nev};{hely};{psize};{idopont};{eloado};{genre};{jegyar}");
             sw.Close();
+
+
         }
 
         // Expose read-only access to the loaded concerts
@@ -147,7 +148,6 @@ namespace koncertmanager
                 {
                     var e = k as Eloadasok;
                     string eloado = e?.Eloado ?? string.Empty;
-                    string eloadas = e?.Eloadas ?? string.Empty;
                     string genre = e?.Genre ?? string.Empty;
                     string jegyar = e != null ? e.Jegyar.ToString() : string.Empty;
 
@@ -170,6 +170,57 @@ namespace koncertmanager
                 listView.EndUpdate();
             }
         }
-
+        public void FilterConcerts(ListView listView, string searchTerm, decimal maxPrice, string genre)
+        {
+            if (listView == null) return;
+            var filtered = koncert.Where(k =>
+            {
+                var e = k as Eloadasok;
+                bool matchesSearch = string.IsNullOrEmpty(searchTerm) || k.Knev.Contains(searchTerm);
+                bool matchesPrice = e == null || e.Jegyar <= maxPrice;
+                bool matchesGenre = genre == "All Genres" || (e != null && e.Genre.Equals(genre, StringComparison.OrdinalIgnoreCase));
+                return matchesSearch && matchesPrice && matchesGenre;
+            }).ToList();
+            listView.BeginUpdate();
+            try
+            {
+                listView.Items.Clear();
+                foreach (var k in filtered)
+                {
+                    var e = k as Eloadasok;
+                    string eloado = e?.Eloado ?? string.Empty;
+                    string genreStr = e?.Genre ?? string.Empty;
+                    string jegyar = e != null ? e.Jegyar.ToString() : string.Empty;
+                    var lvItem = new ListViewItem(new[]
+                    {
+                        k.Knev,
+                        k.Hely,
+                        k.Psize,
+                        eloado,
+                        genreStr,
+                        jegyar,
+                        k.Idopont.ToString("yyyy-MM-dd")
+                    });
+                    listView.Items.Add(lvItem);
+                }
+            }
+            finally
+            {
+                listView.EndUpdate();
+            }
+        }
+        public void DeleteConcert(ListView listView)
+        {
+            if (listView == null || listView.SelectedItems.Count == 0) return;
+            var selectedItem = listView.SelectedItems[0];
+            string knevToDelete = selectedItem.SubItems[0].Text;
+            var koncertToRemove = koncert.FirstOrDefault(k => k.Knev == knevToDelete);
+            if (koncertToRemove != null)
+            {
+                koncert.Remove(koncertToRemove);
+                System.IO.File.WriteAllLines("concerts.txt", koncert.Select(k => k.ToString()));
+                FillListView(listView);
+            }
+        }
     }
 }
