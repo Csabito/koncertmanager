@@ -125,7 +125,7 @@ namespace koncertmanager
 
             mufaj = new ComboBox()
             {
-                DropDownStyle = ComboBoxStyle.DropDown,
+                DropDownStyle = ComboBoxStyle.DropDownList,
                 Dock = DockStyle.Fill,
                 Font = inputFont,
                 BackColor = inputBg,
