@@ -24,7 +24,7 @@ namespace koncertmanager
             InitializeComponent();
             Felepites();
             mentesGomb.Click += (sender, e) => Ment();
-            visszaGomb.Click += (sender, e) => Close();
+            visszaGomb.Click += (sender, e) => Vissza();
         }
 
         private void Felepites()
@@ -259,6 +259,12 @@ namespace koncertmanager
             );
 
             MessageBox.Show("Koncert mentve!");
+            Close();
+            Form1 form1 = new Form1();
+            form1.Show();
+        }
+        private void Vissza()
+        {
             Close();
             Form1 form1 = new Form1();
             form1.Show();
