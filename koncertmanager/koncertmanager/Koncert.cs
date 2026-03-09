@@ -84,10 +84,10 @@ namespace koncertmanager
         }
 
         // Expose read-only access to the loaded concerts
-        public IReadOnlyList<Koncert> GetAllKoncert()
-        {
-            return koncert.AsReadOnly();
-        }
+        //public IReadOnlyList<Koncert> GetAllKoncert()
+        //{
+        //    return koncert.AsReadOnly();
+        //}
 
         // Fill a ListView (assumed to have appropriate columns) with the concerts
         public void FillListView(ListView listView)

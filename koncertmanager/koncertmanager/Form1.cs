@@ -13,7 +13,7 @@ namespace koncertmanager
     public partial class Form1 : Form
     {
         private Label lblTitle;
-        private Button btnAddConcert, btnSearchConcert, btnDeleteConcert;
+        private Button btnAddConcert, btnSearchConcert, btnDeleteConcert, btnResetConcert;
         private TextBox txtSearch;
         private NumericUpDown numPriceFilter;
         private ComboBox cmbGenre;
@@ -26,12 +26,13 @@ namespace koncertmanager
             btnAddConcert.Click += (sender, e) => addConcert();
             btnSearchConcert.Click += (sender, e) => SearchConcerts();
             btnDeleteConcert.Click += (sender, e) => DeleteConcerts();
+            btnResetConcert.Click += (sender, e) => ResetConcert();
         }
         public void DrawElements()
         {
             // 1. Form Settings
             this.Text = "Concert Manager Pro";
-            this.Size = new Size(840, 500);
+            this.Size = new Size(940, 500);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -62,6 +63,7 @@ namespace koncertmanager
             btnAddConcert = new Button() { Text = "Add Concert", Width = 100, BackColor = Color.LightGreen };
             btnSearchConcert = new Button() { Text = "Search Concert", Width = 100, BackColor = Color.LightBlue };
             btnDeleteConcert = new Button() { Text = "Delete Concert", Width = 100, BackColor = Color.Red };
+            btnResetConcert = new Button() { Text = "Reset Filters", Width = 100, BackColor = Color.Yellow };
 
             // 6. Price Filter (NumericUpDown acts as ButtonUp/ButtonDown)
             Label lblPrice = new Label() { Text = "Max Price:", AutoSize = true, Margin = new Padding(10, 5, 0, 0) };
@@ -86,7 +88,7 @@ namespace koncertmanager
             lstConcerts.Columns.Add("Előadó", 120);
             lstConcerts.Columns.Add("Genre", 120);
             lstConcerts.Columns.Add("Price", 120);
-            lstConcerts.Columns.Add("Date", 120);
+            lstConcerts.Columns.Add("Date", 220);
 
             // Add controls to the Filter Panel
             filterPanel.Controls.AddRange(new Control[]
@@ -98,6 +100,7 @@ namespace koncertmanager
                 numPriceFilter,
                 cmbGenre,
                 btnSearchConcert,
+                btnResetConcert,
                 btnDeleteConcert
             });
 
@@ -135,6 +138,13 @@ namespace koncertmanager
                 MessageBox.Show("Please select a concert to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
+        }
+        private void ResetConcert()
+        {
+            txtSearch.Clear();
+            numPriceFilter.Value = numPriceFilter.Maximum;
+            cmbGenre.SelectedIndex = 0;
+            LoadConcerts();
         }
     }
 }
