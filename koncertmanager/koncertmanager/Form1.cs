@@ -100,13 +100,6 @@ namespace koncertmanager
                 btnSearchConcert,
                 btnDeleteConcert
             });
-            //filterPanel.Controls.Add(btnAddConcert);
-            //filterPanel.Controls.Add(new Label() { Text = "  |  ", AutoSize = true }); // Visual separator
-            //filterPanel.Controls.Add(txtSearch);
-            //filterPanel.Controls.Add(lblPrice);
-            //filterPanel.Controls.Add(numPriceFilter);
-            //filterPanel.Controls.Add(cmbGenre);
-            //filterPanel.Controls.Add(btnSearchConcert);
 
             // Add everything to the Form
             this.Controls.Add(lstConcerts);
