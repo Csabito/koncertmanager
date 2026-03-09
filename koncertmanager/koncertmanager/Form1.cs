@@ -117,6 +117,7 @@ namespace koncertmanager
         {
             Form2 form2 = new Form2();
             form2.Show();
+            Hide();
         }
         static KoncertManager manager = new KoncertManager();
         public void LoadConcerts()

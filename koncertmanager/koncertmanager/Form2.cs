@@ -260,6 +260,8 @@ namespace koncertmanager
 
             MessageBox.Show("Koncert mentve!");
             Close();
+            Form1 form1 = new Form1();
+            form1.Show();
         }
     }
 }
